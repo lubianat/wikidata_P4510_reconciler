@@ -13,7 +13,6 @@ def get_qids_from_europe_pmc(query, cursor_mark = "*"):
     Args:
       query (str): The query used to search te article repository. 
     """
-    print(query)
     params = {"query": query, "format": "json", "pageSize": "300", "cursorMark":cursor_mark, "resultType":"lite"}
     response = requests.get("https://www.ebi.ac.uk/europepmc/webservices/rest/search", params)
     data = response.json()
@@ -26,11 +25,9 @@ def get_qids_from_europe_pmc(query, cursor_mark = "*"):
         except:
             continue
       
-    print(pmids)
     qids = convert_ids(pmids, input_id="PMID", output_id="QID")
     
     if "nextCursorMark" in data and len(data["resultList"]["result"])>0:
-      print(data["nextCursorMark"])
       qids.append(get_qids_from_europe_pmc(query, cursor_mark = data["nextCursorMark"]))
       
     return qids
