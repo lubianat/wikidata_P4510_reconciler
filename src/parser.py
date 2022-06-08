@@ -10,10 +10,9 @@ def today_in_quickstatements():
 
 HERE = Path(__file__).parent.resolve()
 
-def render_quickstatements_for_software(software_name):
+def render_quickstatements_for_software(software_name, software_qid):
   query = f"(METHODS:'{software_name}')"
   query_url = f"https://europepmc.org/search?query={query}"
-  software_qid = "Q2038919"
   print("--------")
   qids = get_qids_from_europe_pmc(query)
   valid_qids = [i for i in qids if i!=""]
@@ -29,9 +28,10 @@ def render_quickstatements_for_software(software_name):
 
 @click.command()
 @click.argument('software_name')
+@click.argument('software_qid')
 @click.option('--filename', default="quickstatements.qs", help='The filename to be generated.')
-def main(software_name, filename):
-  qs = render_quickstatements_for_software(software_name)
+def main(software_name, software_qid, filename):
+  qs = render_quickstatements_for_software(software_name, software_qid)
   HERE.parent.joinpath(filename).write_text(qs)
 
 if __name__ == "__main__":
