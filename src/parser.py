@@ -1,9 +1,11 @@
 # https://github.com/lubianat/article_id_converter
-import webbrowser
 from helper import *
 # https://github.com/lubianat/wdcuration
 from wdcuration import today_in_quickstatements, render_qs_url
 import click
+from pathlib import Path
+
+HERE = Path(__file__).parent.resolve()
 
 def render_quickstatements_for_software(software_name):
   query = "(METHODS:'OpenSim')"
@@ -19,13 +21,15 @@ def render_quickstatements_for_software(software_name):
     if "Q" in qid:
       qs+= f"""
     {qid}|P4510|{software_qid}|S887|Q112254021|S248|Q5412157|S813|{today_in_quickstatements()}|S854|"{query_url}" """
-    break
+
   return(qs)
 
 @click.command()
-@click.argument('name')
-def main(name):
-  qs = render_quickstatements_for_software(name)
-  webbrowser.open(render_qs_url(qs))
+@click.argument('software_name')
+@click.option('--filename', default="quickstatements.qs", help='The filename to be generated.')
+def main(software_name, filename):
+  qs = render_quickstatements_for_software(software_name)
+  HERE.parent.joinpath(filename).write_text(qs)
+
 if __name__ == "__main__":
   main()
