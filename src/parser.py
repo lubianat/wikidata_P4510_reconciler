@@ -11,7 +11,7 @@ def today_in_quickstatements():
 HERE = Path(__file__).parent.resolve()
 
 def render_quickstatements_for_software(software_name):
-  query = "(METHODS:'OpenSim')"
+  query = f"(METHODS:'{software_name}')"
   query_url = f"https://europepmc.org/search?query={query}"
   software_qid = "Q2038919"
   print("--------")
