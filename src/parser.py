@@ -1,9 +1,12 @@
 # https://github.com/lubianat/article_id_converter
 from helper import *
-# https://github.com/lubianat/wdcuration
-from wdcuration import today_in_quickstatements, render_qs_url
 import click
 from pathlib import Path
+from time import gmtime, strftime
+
+
+def today_in_quickstatements():
+    return strftime("+%Y-%m-%dT00:00:00Z/11", gmtime())
 
 HERE = Path(__file__).parent.resolve()
 
