@@ -17,7 +17,7 @@ def convert_ids(list_of_ids, input_id="DOI", output_id="PMCID", return_type="lis
         OR
         (DataFrame): A pandas Data
     """
-
+    print(f"===== {str(len(list_of_ids))} identifiers to convert ======")
     id2property = {"PMCID": "P932", "DOI": "P356", "PMID": "P698"}
     values = ""
 

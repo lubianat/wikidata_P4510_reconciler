@@ -26,9 +26,12 @@ def get_qids_from_europe_pmc(query, cursor_mark = "*"):
             continue
       
     qids = convert_ids(pmids, input_id="PMID", output_id="QID")
+    valid_qids = [i for i in qids if i!=""]
+    print(f"{str(len(valid_qids))} qids were found")
+
     
     if "nextCursorMark" in data and len(data["resultList"]["result"])>0:
-      qids.append(get_qids_from_europe_pmc(query, cursor_mark = data["nextCursorMark"]))
+      qids.extend(get_qids_from_europe_pmc(query, cursor_mark = data["nextCursorMark"]))
       
     return qids
 
