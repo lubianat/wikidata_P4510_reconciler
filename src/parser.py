@@ -15,7 +15,7 @@ def main():
   for qid in qids:
     if "Q" in qid:
       qs+= f"""
-    {qid}|P4510|{software_qid}|S887|Q112254021|S248|Q5412157|S813|{today_in_quickstatements()}|S854|"{query_url}" """
+    {qid}|P4510|{software_qid}|S887|Q112254021|S248|Q5412157|S813|{today_in_quickstatements()}"""
   webbrowser.open(render_qs_url(qs))
 if __name__ == "__main__":
   main()
