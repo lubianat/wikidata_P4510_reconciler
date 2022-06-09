@@ -4,13 +4,20 @@ import click
 from pathlib import Path
 from time import gmtime, strftime
 
-
 def today_in_quickstatements():
     return strftime("+%Y-%m-%dT00:00:00Z/11", gmtime())
 
 HERE = Path(__file__).parent.resolve()
 
 def render_quickstatements_for_software(software_name, software_qid):
+  """
+  Saves a file with the Quickstatements commands to tag articles that use a given piece of software. 
+
+  May be applied to other things that are "used" (e.g. equipment and reagents)
+  Args:
+    software_name (str): The name of the software to be searched on EuropePMC. Should be unambiguous. 
+    software_qid (str): The Wikidata QID for the target topic. 
+  """
   query = f"(METHODS:'{software_name}')"
   query_url = f"https://europepmc.org/search?query={query}"
   print("--------")
