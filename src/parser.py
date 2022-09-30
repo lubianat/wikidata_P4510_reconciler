@@ -29,7 +29,7 @@ def render_quickstatements_for_software(software_name, software_qid):
   for qid in qids:
     if "Q" in qid:
       qs+= f"""
-    {qid}|P4510|{software_qid}|S887|Q112254021|S248|Q5412157|S813|{today_in_quickstatements()}|S854|"{query_url}" """
+{qid}|P4510|{software_qid}|S887|Q112254021|S248|Q5412157|S813|{today_in_quickstatements()}|S854|"{query_url}" """
 
   return(qs)
 
